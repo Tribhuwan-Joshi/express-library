@@ -15,7 +15,7 @@ const app = express();
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = process.env.MONGO_URL;
+const mongoDB = process.env.MONGODB_URI;
 
 async function main() {
   await mongoose.connect(mongoDB, console.log("mongodb connected"));
@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(compression);
+app.use(compression());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
